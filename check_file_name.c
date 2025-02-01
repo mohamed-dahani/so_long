@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   check_file_name.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/01 19:55:34 by mdahani          ###   ########.fr       */
+/*   Created: 2025/02/01 14:08:03 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/01 16:20:35 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 
-int main(int ac, char **av)
+int	check_file_name(char *av)
 {
-	if (ac == 2)
-	{
-		if (check_file_name(av[1]))
-		{
-			perror("invalid map !");
-			exit(1);
-		}
-	}
-	perror("please enter a map !");
-	exit(1);
+	size_t len;
+
+	len = ft_strlen(av);
+	if (len > 4 && av[len - 4] == '.' && av[len - 3] == 'b' &&
+		av[len - 2] == 'e' && av[len - 1] == 'r')
+		return (1);
+	return (0);
 }

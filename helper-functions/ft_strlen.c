@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/01 19:55:34 by mdahani          ###   ########.fr       */
+/*   Created: 2025/02/01 14:17:15 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/01 17:49:21 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
-int main(int ac, char **av)
+size_t	ft_strlen(char *str)
 {
-	if (ac == 2)
-	{
-		if (check_file_name(av[1]))
-		{
-			perror("invalid map !");
-			exit(1);
-		}
-	}
-	perror("please enter a map !");
-	exit(1);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
