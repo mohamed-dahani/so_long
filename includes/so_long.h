@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/01 16:20:50 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/01 21:06:28 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <stdlib.h>
 
 size_t	ft_strlen(char *str);
+char	*get_next_line(int fd);
 
-int	check_file_name(char *av);
+int	    check_file_name(char *av);
 
 #endif
