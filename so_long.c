@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/01 19:55:34 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/01 20:56:40 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int ac, char **av)
 {
 	if (ac == 2)
 	{
-		if (check_file_name(av[1]))
+		if (!check_file_name(av[1]))
 		{
 			perror("invalid map !");
 			exit(1);
