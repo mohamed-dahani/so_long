@@ -6,13 +6,13 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:17:15 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/01 17:49:21 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/02 15:31:50 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
