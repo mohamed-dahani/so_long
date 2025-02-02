@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/02 18:45:41 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/02 20:58:09 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 typedef	struct s_map
 {
@@ -28,7 +29,7 @@ typedef	struct s_map
 size_t	ft_strlen(const char *str);
 char	*get_next_line(int fd);
 
-int	    check_file_name(char *av);
+int		check_file_name(char *av);
 int		check_map(char *filename, t_map *map);
 void	free_array(char **ptr, int i);
 
