@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/02 18:26:20 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/02 18:53:16 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "helper-functions/get_next_line/get_next_line.h"
 
 
-// int check_regtangel(char *str)
+// int check_rectangle(char *str)
 // {
 //     //check nafes size 
 // }
@@ -101,8 +101,8 @@ int	check_map(char *filename, t_map *map)
 	if (!map->map)
 		return (0);
 	if (!check_size_map(map))
-		return (0);
+		return (free_array(map->map, map->rows), 0);
 	print_map(map->map, map->rows);
-	// free_array(map->map, map->rows);
+	free_array(map->map, map->rows);
 	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 18:22:35 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/02 18:25:12 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/02 18:45:16 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-char	**free_array(char **ptr, int i)
+void	free_array(char **ptr, int i)
 {
 	while (i > 0)
 	{
@@ -20,5 +20,4 @@ char	**free_array(char **ptr, int i)
 		free(ptr[i]);
 	}
 	free(ptr);
-	return (0);
 }
