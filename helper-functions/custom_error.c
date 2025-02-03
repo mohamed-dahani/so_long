@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   custom_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/03 23:16:42 by mdahani          ###   ########.fr       */
+/*   Created: 2025/02/03 23:08:52 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/03 23:14:58 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
-int main(int ac, char **av)
+void	custom_error(char *msg)
 {
-	t_map map;
+	int	i;
 
-	if (ac != 2 || !check_file_name(av[1]))
-		return (custom_error("Error\nNo such file or directory !\n"), 1);
-	if (!check_map(av[1], &map))
-		return(custom_error("Error\nInvalid map !\n"), 1);
+	i = 0;
+	while (msg[i])
+	{
+		write(2, &msg[i], 1);
+		i++;
+	}
 }

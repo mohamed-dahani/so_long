@@ -6,18 +6,13 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/03 19:54:42 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/03 23:46:50 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 #include "helper-functions/get_next_line/get_next_line.h"
 
-
-// int check_rectangle(char *str)
-// {
-//     //check nafes size 
-// }
 static int check_valid_character(int fd, t_map *map)
 {
 	char	*line;
@@ -108,7 +103,7 @@ void	flood_fill_rec(t_map *map, int x, int y)
 	
 	if (x < 0 || x >= map->rows || y < 0 || y >= map->columns)
 		return ;
-	if (map->map[x][y] != '0' && map->map[x][y] != 'C')
+	if (map->map[x][y] != '0' && map->map[x][y] != 'C' && map->map[x][y] != 'P')
 		return ;
 	map->map[x][y] = 'V';
 	flood_fill_rec(map, x + 1, y);
@@ -130,7 +125,6 @@ int	flood_fill(t_map *map)
 		{
 			if (map->map[x][y] == 'P')
 			{
-				printf("x: %d\ny: %d\n", x, y);
 				flood_fill_rec(map, x, y);
 				return (1);
 			}
@@ -138,7 +132,32 @@ int	flood_fill(t_map *map)
 		}
 		x++;
 	}
-	return (0);	
+	return (0);
+}
+
+int check_edges_map(t_map *map)
+{
+	int	(i), (j);
+
+	i = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while(j < map->columns)
+		{
+			if (i == 0 && map->map[i][j] != '1')
+				return (0);
+			if (i == (map->rows - 1) && map->map[map->rows - 1][j] != '1')	
+				return (0);
+			if (j == 0 && map->map[i][j] != '1')
+				return (0);
+			if (j == (map->columns - 1)  && map->map[i][j] != '1')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 void print_map(t_map *map)
@@ -160,6 +179,8 @@ int	check_map(char *filename, t_map *map)
 	if (!check_all_chars(map))
 		return (free_array(map->map, map->rows), 0);
 	if (!flood_fill(map))
+		return (free_array(map->map, map->rows), 0);
+	if (!check_edges_map(map))
 		return (free_array(map->map, map->rows), 0);
 	printf("rows: %d\ncolumns: %d\n", map->rows, map->columns);
 	print_map(map);
