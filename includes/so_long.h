@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/03 23:11:06 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:53:45 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef	struct s_map
 {
+	char	**test_map;
 	char	**map;
 	int		rows;
 	int		columns;

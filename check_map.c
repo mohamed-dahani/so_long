@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/03 23:46:50 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:46:53 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char **read_map(int fd, t_map *map, char  *filename)
 {
 	char 	**lines;
 	int		i;
+	int		len;
 
 	i = 0;
 	fd = open(filename, O_RDONLY);
@@ -55,6 +56,9 @@ char **read_map(int fd, t_map *map, char  *filename)
 	while (i  < map->rows)
 	{
 		lines[i] = get_next_line(fd);
+		len = ft_strlen(lines[i]);
+		if (len > 0 && lines[i][len - 1] == '\n')
+			lines[i][len - 1] = '\0';
 		i++;
 	}
 	lines[i] = NULL;
@@ -74,7 +78,7 @@ int check_size_map(t_map *map)
 			return (0);
 		i++;
 	}
-	map->columns = (int)line_length - 1;
+	map->columns = (int)line_length;
 	return (1);
 }
 int	check_all_chars(t_map *map)
@@ -112,6 +116,26 @@ void	flood_fill_rec(t_map *map, int x, int y)
 	flood_fill_rec(map, x, y - 1);
 }
 
+int	check_flood_fill(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] != 'V' && map->map[i][j] != '1' && map->map[i][j] != 'E')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	flood_fill(t_map *map)
 {
 	int	x;
@@ -126,7 +150,9 @@ int	flood_fill(t_map *map)
 			if (map->map[x][y] == 'P')
 			{
 				flood_fill_rec(map, x, y);
-				return (1);
+				if (check_flood_fill(map))
+					return (1);
+				return (0);
 			}
 			y++;
 		}
@@ -163,7 +189,7 @@ int check_edges_map(t_map *map)
 void print_map(t_map *map)
 {
 	for(int i = 0; i < map->rows; i++)
-		printf("%s", map->map[i]);
+		printf("%s\n", map->map[i]);
 }
 int	check_map(char *filename, t_map *map)
 {
