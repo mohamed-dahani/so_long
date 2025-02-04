@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   run_window.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/04 17:02:52 by mdahani          ###   ########.fr       */
+/*   Created: 2025/02/04 16:49:18 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/04 21:50:12 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
 
-int	main(int ac, char **av)
+int	run_window(t_map *map, t_window *window)
 {
-	t_map		map;
-	t_window	window;
-
-	if (ac != 2 || !check_file_name(av[1]))
-		return (custom_error("Error\nNo such file or directory !\n"), 1);
-	if (!check_map(av[1], &map))
-		return (custom_error("Error\nInvalid map !\n"), 1);
-	if (!run_window(&map, &window))
-		return (custom_error("Error\nWindow is not running !\n"), 1);
+	window->mlx = mlx_init();
+	if (!window->mlx)
+		return (0);
+	window->window = mlx_new_window(window->mlx, map->columns * 128, map->rows * 128, "so_long");
+	if (!window->window)	
+		return (0);
+	mlx_loop(window->mlx);
+	return (1);
 }

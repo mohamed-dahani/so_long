@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/04 15:49:13 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/04 19:38:04 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "../minilibx-linux/mlx.h"
 
 typedef struct s_map
 {
@@ -26,6 +27,13 @@ typedef struct s_map
 	int		rows;
 	int		columns;
 }			t_map;
+
+typedef struct s_window
+{
+	void	*mlx;
+	void	*window;
+}			t_window;
+
 
 size_t		ft_strlen(const char *str);
 char		*get_next_line(int fd);
@@ -36,5 +44,6 @@ int			check_map(char *filename, t_map *map);
 int			flood_fill(t_map *map);
 int			check_edges_map(t_map *map);
 void		free_array(char **ptr, int i);
+int			run_window(t_map *map, t_window *window);
 
 #endif

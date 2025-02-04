@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:24:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/04 15:25:17 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/04 16:46:44 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static int	check_flood_fill(t_map *map)
 		j = 0;
 		while (map->copy_map[i][j])
 		{
-			if (map->copy_map[i][j] != 'V' && map->copy_map[i][j] != '1'
-				&& map->copy_map[i][j] != 'E')
+			if (map->copy_map[i][j] == 'C')
 				return (0);
 			j++;
 		}
