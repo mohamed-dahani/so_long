@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/04 19:38:04 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/05 19:46:45 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,9 @@ typedef struct s_map
 	char	**map;
 	int		rows;
 	int		columns;
-}			t_map;
-
-typedef struct s_window
-{
 	void	*mlx;
 	void	*window;
-}			t_window;
-
+}			t_map;
 
 size_t		ft_strlen(const char *str);
 char		*get_next_line(int fd);
@@ -44,6 +39,6 @@ int			check_map(char *filename, t_map *map);
 int			flood_fill(t_map *map);
 int			check_edges_map(t_map *map);
 void		free_array(char **ptr, int i);
-int			run_window(t_map *map, t_window *window);
+int			run_window(t_map *map);
 
 #endif
