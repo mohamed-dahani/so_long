@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/06 13:17:01 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/06 16:35:36 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
+# include <X11/X.h>
 
 typedef struct s_map
 {
@@ -27,16 +28,16 @@ typedef struct s_map
 	char	**map;
 	int		rows;
 	int		columns;
-	void *mlx;
-    void *window;
-    void *player;
-    void *floor;
-    void *wall;
-    void *coin;
-    void *exit;
-    int player_x;
-    int player_y;
-    int collectibles;
+	void    *mlx;
+    void    *window;
+    void    *player;
+    void    *floor;
+    void    *wall;
+    void    *coin;
+    void    *exit;
+    int     player_x;
+    int     player_y;
+    int     collectibles;
 }			t_map;
 
 size_t		ft_strlen(const char *str);

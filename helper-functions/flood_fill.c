@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:24:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/06 13:19:51 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:05:27 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int	flood_fill(t_map *map)
 		{
 			if (map->copy_map[x][y] == 'P')
 			{
-				map->player_x = x;
-				map->player_y = y;
 				flood_fill_rec(map, x, y);
 				if (check_flood_fill(map))
 					return (1);
