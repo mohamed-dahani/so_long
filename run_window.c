@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/06 19:19:07 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/06 21:21:03 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,26 @@ int	on_keypress(int key_code, t_map *map)
     if (key_code == XK_Escape)
         exit(0);
     else if (key_code == XK_w || key_code == XK_Up)
+    {
         move_player(map, 0, -1);
+        printf("moves: %d\n", ++moves);
+    }
     else if (key_code == XK_s || key_code == XK_Down)
+    {
         move_player(map, 0, 1);
+        printf("moves: %d\n", ++moves);
+    }
     else if (key_code == XK_a || key_code == XK_Left)
+    {
         move_player(map, -1, 0);
+        printf("moves: %d\n", ++moves);
+    }
     else if (key_code == XK_d || key_code == XK_Right)
+    {
         move_player(map, 1, 0);
-    printf("moves: %d\n", ++moves);
-    return (0);
+        printf("moves: %d\n", ++moves);
+    }
+    return (1);
 }
 
 int	run_window(t_map *map)
