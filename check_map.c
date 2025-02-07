@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/04 16:44:57 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/07 12:47:07 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	check_size_map(t_map *map)
 			return (0);
 		i++;
 	}
+	if (i > 32 || line_length > 60)
+		return (0);
 	map->columns = (int)line_length;
 	return (1);
 }
