@@ -6,11 +6,33 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/06 21:21:03 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/07 11:13:19 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+
+void	cleanup(t_map *map)
+{
+	if (map->exit)
+		mlx_destroy_image(map->mlx, map->exit);
+	if (map->coin)
+		mlx_destroy_image(map->mlx, map->coin);
+	if (map->player)
+		mlx_destroy_image(map->mlx, map->player);
+	if (map->wall)
+		mlx_destroy_image(map->mlx, map->wall);
+	if (map->floor)
+		mlx_destroy_image(map->mlx, map->floor);
+	if (map->window)
+		mlx_destroy_window(map->mlx, map->window);
+	if (map->mlx)
+	{
+		mlx_destroy_display(map->mlx);
+		free(map->mlx);
+	}
+    free_array(map->map, map->rows);
+}
 
 void find_player_and_coins(t_map *map)
 {
@@ -75,6 +97,7 @@ void	move_player(t_map *map, int move_x, int move_y)
         if (map->collectibles == 0)
         {
             printf("You win!\n");
+            cleanup(map);
             exit(0);
         }
         else
@@ -92,7 +115,10 @@ int	on_keypress(int key_code, t_map *map)
     static int moves;
 
     if (key_code == XK_Escape)
+    {
+        cleanup(map);
         exit(0);
+    }
     else if (key_code == XK_w || key_code == XK_Up)
     {
         move_player(map, 0, -1);
