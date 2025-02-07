@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/07 12:29:56 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/07 20:33:05 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,13 +152,16 @@ int	run_window(t_map *map)
         return (0);
 
     int w, h;
-    map->floor = mlx_xpm_file_to_image(map->mlx, "images/floor.xpm", &w, &h);
-    map->wall = mlx_xpm_file_to_image(map->mlx, "images/wall.xpm", &w, &h);
-    map->player = mlx_xpm_file_to_image(map->mlx, "images/player.xpm", &w, &h);
-    map->coin = mlx_xpm_file_to_image(map->mlx, "images/coin.xpm", &w, &h);
-    map->exit = mlx_xpm_file_to_image(map->mlx, "images/exit.xpm", &w, &h);
+    map->floor = mlx_xpm_file_to_image(map->mlx, "textures/floor.xpm", &w, &h);
+    map->wall = mlx_xpm_file_to_image(map->mlx, "textures/wall.xpm", &w, &h);
+    map->player = mlx_xpm_file_to_image(map->mlx, "textures/player.xpm", &w, &h);
+    map->coin = mlx_xpm_file_to_image(map->mlx, "textures/coin.xpm", &w, &h);
+    map->exit = mlx_xpm_file_to_image(map->mlx, "textures/exit.xpm", &w, &h);
     if (!map->floor || !map->wall || !map->player || !map->coin || !map->exit)
+    {
+        cleanup(map);
         return (0);
+    }
     find_player_and_coins(map);
     draw_map(map);
     mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);
