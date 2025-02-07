@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/07 20:33:05 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/07 20:55:06 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	move_player(t_map *map, int move_x, int move_y)
 {
     int new_x = map->player_x + move_x;
     int new_y = map->player_y + move_y;
+    static int moves;
     if (map->map[new_y][new_x] == '1')
         return;
     if (map->map[new_y][new_x] == 'C')
@@ -107,39 +108,32 @@ void	move_player(t_map *map, int move_x, int move_y)
     map->player_x = new_x;
     map->player_y = new_y;
     map->map[new_y][new_x] = 'P'; 
+    printf("moves: %d\n", ++moves);
     draw_map(map);
 }
 
 int	on_keypress(int key_code, t_map *map)
 {
-    static int moves;
-
     if (key_code == XK_Escape)
     {
         cleanup(map);
         exit(0);
     }
     else if (key_code == XK_w || key_code == XK_Up)
-    {
         move_player(map, 0, -1);
-        printf("moves: %d\n", ++moves);
-    }
     else if (key_code == XK_s || key_code == XK_Down)
-    {
         move_player(map, 0, 1);
-        printf("moves: %d\n", ++moves);
-    }
     else if (key_code == XK_a || key_code == XK_Left)
-    {
         move_player(map, -1, 0);
-        printf("moves: %d\n", ++moves);
-    }
     else if (key_code == XK_d || key_code == XK_Right)
-    {
         move_player(map, 1, 0);
-        printf("moves: %d\n", ++moves);
-    }
     return (1);
+}
+
+int close_window(t_map *map)
+{
+    cleanup(map);
+    exit(0);
 }
 
 int	run_window(t_map *map)
@@ -165,6 +159,7 @@ int	run_window(t_map *map)
     find_player_and_coins(map);
     draw_map(map);
     mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);
+    mlx_hook(map->window, 17, 0, &close_window, map);
     mlx_loop(map->mlx);
     return (1);
 }
