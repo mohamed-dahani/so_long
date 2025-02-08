@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/07 20:55:06 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 17:19:08 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	move_player(t_map *map, int move_x, int move_y)
     {
         if (map->collectibles == 0)
         {
-            printf("You win!\n");
+            ft_printf("You win!\n");
             cleanup(map);
             exit(0);
         }
@@ -108,7 +108,7 @@ void	move_player(t_map *map, int move_x, int move_y)
     map->player_x = new_x;
     map->player_y = new_y;
     map->map[new_y][new_x] = 'P'; 
-    printf("moves: %d\n", ++moves);
+    ft_printf("moves: %d\n", ++moves);
     draw_map(map);
 }
 

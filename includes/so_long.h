@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/06 16:35:36 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 17:18:07 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_map
 
 size_t		ft_strlen(const char *str);
 char		*get_next_line(int fd);
+int	        ft_printf(const char *string, ...);
 
 void		custom_error(char *msg);
 int			check_file_name(char *av);
