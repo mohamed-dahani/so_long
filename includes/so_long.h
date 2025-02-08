@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/08 17:18:07 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 18:21:40 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_map
     int     player_x;
     int     player_y;
     int     collectibles;
+    void    *coins[6];
+    int     coin_frame;
 }			t_map;
 
 size_t		ft_strlen(const char *str);

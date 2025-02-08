@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/08 17:19:08 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 19:19:59 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,18 @@ void	cleanup(t_map *map)
 {
 	if (map->exit)
 		mlx_destroy_image(map->mlx, map->exit);
-	if (map->coin)
-		mlx_destroy_image(map->mlx, map->coin);
+	if (map->coins[0])
+		mlx_destroy_image(map->mlx, map->coins[0]);
+    if (map->coins[1])
+		mlx_destroy_image(map->mlx, map->coins[1]);
+    if (map->coins[2])
+		mlx_destroy_image(map->mlx, map->coins[2]);
+    if (map->coins[3])
+		mlx_destroy_image(map->mlx, map->coins[3]);
+    if (map->coins[4])
+		mlx_destroy_image(map->mlx, map->coins[4]);
+    if (map->coins[5])
+		mlx_destroy_image(map->mlx, map->coins[5]);
 	if (map->player)
 		mlx_destroy_image(map->mlx, map->player);
 	if (map->wall)
@@ -72,7 +82,7 @@ void	draw_map(t_map *map)
             else if (map->map[i][j] == 'P')
                 mlx_put_image_to_window(map->mlx, map->window, map->player, j * 64, i * 64);
             else if (map->map[i][j] == 'C')
-                mlx_put_image_to_window(map->mlx, map->window, map->coin, j * 64, i * 64);
+                mlx_put_image_to_window(map->mlx, map->window, map->coins[map->coin_frame], j * 64, i * 64);
             else if (map->map[i][j] == 'E')
                 mlx_put_image_to_window(map->mlx, map->window, map->exit, j * 64, i * 64);
             j++;
@@ -136,6 +146,21 @@ int close_window(t_map *map)
     exit(0);
 }
 
+int animate_coin(t_map *map)
+{
+    static int  frame_counter;
+    const int   delay = 10;
+
+    frame_counter++;
+    if (frame_counter >= delay)
+    {
+        frame_counter = 0;
+        map->coin_frame = (map->coin_frame + 1) % 6;
+    }
+    draw_map(map);    
+    return (1);
+}
+
 int	run_window(t_map *map)
 {
     map->mlx = mlx_init();
@@ -149,17 +174,24 @@ int	run_window(t_map *map)
     map->floor = mlx_xpm_file_to_image(map->mlx, "textures/floor.xpm", &w, &h);
     map->wall = mlx_xpm_file_to_image(map->mlx, "textures/wall.xpm", &w, &h);
     map->player = mlx_xpm_file_to_image(map->mlx, "textures/player.xpm", &w, &h);
-    map->coin = mlx_xpm_file_to_image(map->mlx, "textures/coin.xpm", &w, &h);
+    map->coins[0] = mlx_xpm_file_to_image(map->mlx, "textures/coin.xpm", &w, &h);
+    map->coins[1] = mlx_xpm_file_to_image(map->mlx, "textures/coin2.xpm", &w, &h);
+    map->coins[2] = mlx_xpm_file_to_image(map->mlx, "textures/coin3.xpm", &w, &h);
+    map->coins[3] = mlx_xpm_file_to_image(map->mlx, "textures/coin4.xpm", &w, &h);
+    map->coins[4] = mlx_xpm_file_to_image(map->mlx, "textures/coin5.xpm", &w, &h);
+    map->coins[5] = mlx_xpm_file_to_image(map->mlx, "textures/coin6.xpm", &w, &h);
     map->exit = mlx_xpm_file_to_image(map->mlx, "textures/exit.xpm", &w, &h);
-    if (!map->floor || !map->wall || !map->player || !map->coin || !map->exit)
+    if (!map->floor || !map->wall || !map->player || !map->coins[0] || !map->coins[1] || !map->coins[2] || !map->coins[3] || !map->coins[4] || !map->coins[5] || !map->exit)
     {
         cleanup(map);
         return (0);
     }
+    map->coin_frame = 0;
     find_player_and_coins(map);
     draw_map(map);
     mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);
     mlx_hook(map->window, 17, 0, &close_window, map);
+    mlx_loop_hook(map->mlx, &animate_coin, map);
     mlx_loop(map->mlx);
     return (1);
 }
