@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/07 12:47:07 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 20:53:50 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,25 @@ int	check_size_map(t_map *map)
 
 int	check_all_chars(t_map *map)
 {
-	int	i;
-	int	j;
+    int	i;
+    int	j;
 
-	i = 0;
-	while (map->copy_map[i])
-	{
-		j = 0;
-		while (map->copy_map[i][j])
-		{
-			if (map->copy_map[i][j] != 'P' && map->copy_map[i][j] != 'C'
-				&& map->copy_map[i][j] != 'E' && map->copy_map[i][j] != '0'
-				&& map->copy_map[i][j] != '1' && map->copy_map[i][j] != '\n')
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
+    i = 0;
+    while (map->copy_map[i])
+    {
+        j = 0;
+        while (map->copy_map[i][j])
+        {
+            if (map->copy_map[i][j] != 'P' && map->copy_map[i][j] != 'C'
+                && map->copy_map[i][j] != 'E' && map->copy_map[i][j] != '0'
+                && map->copy_map[i][j] != '1' && map->copy_map[i][j] != 'N'
+                && map->copy_map[i][j] != '\n')
+                return (0);
+            j++;
+        }
+        i++;
+    }
+    return (1);
 }
 
 int	check_map(char *filename, t_map *map)

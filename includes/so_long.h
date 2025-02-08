@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/08 18:21:40 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 20:56:43 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ typedef struct s_map
     void    *player;
     void    *floor;
     void    *wall;
-    void    *coin;
+    void    *coin[6];
+    void    *enemy;
     void    *exit;
     int     player_x;
     int     player_y;
     int     collectibles;
-    void    *coins[6];
     int     coin_frame;
 }			t_map;
 

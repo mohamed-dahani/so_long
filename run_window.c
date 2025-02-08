@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/08 19:19:59 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/08 20:57:52 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 void	cleanup(t_map *map)
 {
+	if (map->enemy)
+		mlx_destroy_image(map->mlx, map->enemy);
 	if (map->exit)
 		mlx_destroy_image(map->mlx, map->exit);
-	if (map->coins[0])
-		mlx_destroy_image(map->mlx, map->coins[0]);
-    if (map->coins[1])
-		mlx_destroy_image(map->mlx, map->coins[1]);
-    if (map->coins[2])
-		mlx_destroy_image(map->mlx, map->coins[2]);
-    if (map->coins[3])
-		mlx_destroy_image(map->mlx, map->coins[3]);
-    if (map->coins[4])
-		mlx_destroy_image(map->mlx, map->coins[4]);
-    if (map->coins[5])
-		mlx_destroy_image(map->mlx, map->coins[5]);
+	if (map->coin[0])
+		mlx_destroy_image(map->mlx, map->coin[0]);
+    if (map->coin[1])
+		mlx_destroy_image(map->mlx, map->coin[1]);
+    if (map->coin[2])
+		mlx_destroy_image(map->mlx, map->coin[2]);
+    if (map->coin[3])
+		mlx_destroy_image(map->mlx, map->coin[3]);
+    if (map->coin[4])
+		mlx_destroy_image(map->mlx, map->coin[4]);
+    if (map->coin[5])
+		mlx_destroy_image(map->mlx, map->coin[5]);
 	if (map->player)
 		mlx_destroy_image(map->mlx, map->player);
 	if (map->wall)
@@ -82,7 +84,9 @@ void	draw_map(t_map *map)
             else if (map->map[i][j] == 'P')
                 mlx_put_image_to_window(map->mlx, map->window, map->player, j * 64, i * 64);
             else if (map->map[i][j] == 'C')
-                mlx_put_image_to_window(map->mlx, map->window, map->coins[map->coin_frame], j * 64, i * 64);
+                mlx_put_image_to_window(map->mlx, map->window, map->coin[map->coin_frame], j * 64, i * 64);
+            else if (map->map[i][j] == 'N')
+                mlx_put_image_to_window(map->mlx, map->window, map->enemy, j * 64, i * 64);
             else if (map->map[i][j] == 'E')
                 mlx_put_image_to_window(map->mlx, map->window, map->exit, j * 64, i * 64);
             j++;
@@ -96,6 +100,12 @@ void	move_player(t_map *map, int move_x, int move_y)
     int new_x = map->player_x + move_x;
     int new_y = map->player_y + move_y;
     static int moves;
+    if (map->map[new_y][new_x] == 'N')
+    {
+        ft_printf("Game Over!\n");
+        cleanup(map);
+        exit(0);
+    }
     if (map->map[new_y][new_x] == '1')
         return;
     if (map->map[new_y][new_x] == 'C')
@@ -174,14 +184,15 @@ int	run_window(t_map *map)
     map->floor = mlx_xpm_file_to_image(map->mlx, "textures/floor.xpm", &w, &h);
     map->wall = mlx_xpm_file_to_image(map->mlx, "textures/wall.xpm", &w, &h);
     map->player = mlx_xpm_file_to_image(map->mlx, "textures/player.xpm", &w, &h);
-    map->coins[0] = mlx_xpm_file_to_image(map->mlx, "textures/coin.xpm", &w, &h);
-    map->coins[1] = mlx_xpm_file_to_image(map->mlx, "textures/coin2.xpm", &w, &h);
-    map->coins[2] = mlx_xpm_file_to_image(map->mlx, "textures/coin3.xpm", &w, &h);
-    map->coins[3] = mlx_xpm_file_to_image(map->mlx, "textures/coin4.xpm", &w, &h);
-    map->coins[4] = mlx_xpm_file_to_image(map->mlx, "textures/coin5.xpm", &w, &h);
-    map->coins[5] = mlx_xpm_file_to_image(map->mlx, "textures/coin6.xpm", &w, &h);
+    map->coin[0] = mlx_xpm_file_to_image(map->mlx, "textures/coin.xpm", &w, &h);
+    map->coin[1] = mlx_xpm_file_to_image(map->mlx, "textures/coin2.xpm", &w, &h);
+    map->coin[2] = mlx_xpm_file_to_image(map->mlx, "textures/coin3.xpm", &w, &h);
+    map->coin[3] = mlx_xpm_file_to_image(map->mlx, "textures/coin4.xpm", &w, &h);
+    map->coin[4] = mlx_xpm_file_to_image(map->mlx, "textures/coin5.xpm", &w, &h);
+    map->coin[5] = mlx_xpm_file_to_image(map->mlx, "textures/coin6.xpm", &w, &h);
+    map->enemy = mlx_xpm_file_to_image(map->mlx, "textures/enemy.xpm", &w, &h);
     map->exit = mlx_xpm_file_to_image(map->mlx, "textures/exit.xpm", &w, &h);
-    if (!map->floor || !map->wall || !map->player || !map->coins[0] || !map->coins[1] || !map->coins[2] || !map->coins[3] || !map->coins[4] || !map->coins[5] || !map->exit)
+    if (!map->floor || !map->wall || !map->player || !map->coin[0] || !map->coin[1] || !map->coin[2] || !map->coin[3] || !map->coin[4] || !map->coin[5] || !map->enemy || !map->exit)
     {
         cleanup(map);
         return (0);
