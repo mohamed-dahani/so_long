@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/09 23:33:12 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/09 23:38:04 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ void	draw_map(t_map *map)
         i++;
     }
     char *moves_num = ft_itoa(map->moves);
-    mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, moves_num);
+    char *moves_str = ft_strjoin("Moves: ", moves_num);
+    mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, moves_str);
+    free(moves_str);
     free(moves_num);
 }
 
