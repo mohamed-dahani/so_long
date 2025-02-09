@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/09 20:52:23 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/09 23:33:12 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	cleanup(t_map *map)
 		mlx_destroy_display(map->mlx);
 		free(map->mlx);
 	}
-    // if (map->moves_int_to_str)
-    //     free(map->moves_int_to_str);
     free_array(map->map, map->rows);
 }
 
@@ -103,14 +101,15 @@ void	draw_map(t_map *map)
         }
         i++;
     }
-    // mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, map->moves_int_to_str);
+    char *moves_num = ft_itoa(map->moves);
+    mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, moves_num);
+    free(moves_num);
 }
 
 void	move_player(t_map *map, int move_x, int move_y)
 {
     int new_x = map->player_x + move_x;
     int new_y = map->player_y + move_y;
-    static int moves;
     if (map->map[new_y][new_x] == '1')
         return;
     if (map->map[new_y][new_x] == 'C')
@@ -133,15 +132,8 @@ void	move_player(t_map *map, int move_x, int move_y)
     map->player_x = new_x;
     map->player_y = new_y;
     map->map[new_y][new_x] = 'P'; 
-    ft_printf("moves: %d\n", ++moves);
-    
-    // // Free existing moves string
-    // if (map->moves_int_to_str)
-    //     free(map->moves_int_to_str);
-    
-    // // Generate new moves string
-    // map->moves_int_to_str = ft_itoa(moves);
-    draw_map(map);
+    map->moves++;
+    ft_printf("moves: %d\n", map->moves);
 }
 
 int	on_keypress(int key_code, t_map *map)
@@ -257,6 +249,7 @@ int	run_window(t_map *map)
     }
     map->coin_frame = 0;
 	map->enemy_dir = 1;
+    map->moves = 0;
     find_player_and_coins_and_enemy(map);
     draw_map(map);
     mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);

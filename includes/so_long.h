@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/09 20:49:30 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/09 23:30:01 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_map
     int     enemy_x;
     int     enemy_y;
     int     enemy_dir;
-    char    *moves_int_to_str;
+    int     moves;
 }			t_map;
 
 size_t		ft_strlen(const char *str);
