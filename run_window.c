@@ -6,11 +6,12 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/09 18:50:10 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/09 20:52:23 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/so_long.h"
+#include "helper-functions/get_next_line/get_next_line.h"
 
 void	cleanup(t_map *map)
 {
@@ -43,6 +44,8 @@ void	cleanup(t_map *map)
 		mlx_destroy_display(map->mlx);
 		free(map->mlx);
 	}
+    // if (map->moves_int_to_str)
+    //     free(map->moves_int_to_str);
     free_array(map->map, map->rows);
 }
 
@@ -100,6 +103,7 @@ void	draw_map(t_map *map)
         }
         i++;
     }
+    // mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, map->moves_int_to_str);
 }
 
 void	move_player(t_map *map, int move_x, int move_y)
@@ -130,6 +134,13 @@ void	move_player(t_map *map, int move_x, int move_y)
     map->player_y = new_y;
     map->map[new_y][new_x] = 'P'; 
     ft_printf("moves: %d\n", ++moves);
+    
+    // // Free existing moves string
+    // if (map->moves_int_to_str)
+    //     free(map->moves_int_to_str);
+    
+    // // Generate new moves string
+    // map->moves_int_to_str = ft_itoa(moves);
     draw_map(map);
 }
 
