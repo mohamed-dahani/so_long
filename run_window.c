@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/09 17:57:13 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/09 18:50:10 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int close_window(t_map *map)
     exit(0);
 }
 
-int animate_coin(t_map *map)
+void animate_coin(t_map *map)
 {
     static int  frame_counter;
     const int   delay = 10;
@@ -169,13 +169,12 @@ int animate_coin(t_map *map)
         map->coin_frame = (map->coin_frame + 1) % 6;
     }
     draw_map(map);    
-    return (1);
 }
 
-int animate_enemy(t_map *map)
+void animate_enemy(t_map *map)
 {
     static int frame = 0;
-    const int speed = 1500;
+    const int speed = 30;
 
     frame++;
     if (frame >= speed)
@@ -208,9 +207,15 @@ int animate_enemy(t_map *map)
             draw_map(map);
         }
     }
-    return (1);
 }
 
+
+int animation(t_map *map)
+{
+    animate_coin(map);
+    animate_enemy(map);
+    return (1);    
+}
 
 
 int	run_window(t_map *map)
@@ -245,8 +250,7 @@ int	run_window(t_map *map)
     draw_map(map);
     mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);
     mlx_hook(map->window, 17, 0, &close_window, map);
-    mlx_loop_hook(map->mlx, &animate_coin, map);
-    mlx_loop_hook(map->mlx, &animate_enemy, map);
+    mlx_loop_hook(map->mlx, &animation, map);
     mlx_loop(map->mlx);
     return (1);
 }
