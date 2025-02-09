@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/08 23:17:43 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/09 17:57:13 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,6 @@ void	move_player(t_map *map, int move_x, int move_y)
     int new_x = map->player_x + move_x;
     int new_y = map->player_y + move_y;
     static int moves;
-    if (map->map[new_y][new_x] == 'N')
-    {
-        ft_printf("Game Over!\n");
-        cleanup(map);
-        exit(0);
-    }
     if (map->map[new_y][new_x] == '1')
         return;
     if (map->map[new_y][new_x] == 'C')
@@ -178,38 +172,46 @@ int animate_coin(t_map *map)
     return (1);
 }
 
-// int animate_enemy(t_map *map)
-// {
-//     static int frame = 0;
-//     const int speed = 1500;  // Adjust speed (higher = slower)
+int animate_enemy(t_map *map)
+{
+    static int frame = 0;
+    const int speed = 1500;
 
-//     frame++;
-//     if (frame >= speed)
-//     {
-//         frame = 0;
-//         int new_y = map->enemy_y + map->enemy_dir;
+    frame++;
+    if (frame >= speed)
+    {
+        frame = 0;
+        int new_y = map->enemy_y + map->enemy_dir;
 
-//         // Check boundaries and walls
-//         if (new_y < 0 || new_y >= map->rows || map->map[new_y][map->enemy_x] == '1')
-//         {
-//             // Reverse direction on collision or boundary
-//             map->enemy_dir *= -1;
-//             new_y = map->enemy_y + map->enemy_dir;
-//         }
+        if (map->map[new_y][map->enemy_x] == 'P')
+        {
+            ft_printf("Game Over!\n");
+            cleanup(map);
+            exit(0);
+        }
+        if (map->map[map->enemy_y][map->enemy_x] == 'P')
+        {
+            ft_printf("Game Over!\n");
+            cleanup(map);
+            exit(0);
+        }
+        if (new_y < 0 || new_y >= map->rows || map->map[new_y][map->enemy_x] == '1')
+        {
+            map->enemy_dir *= -1;
+            new_y = map->enemy_y + map->enemy_dir;
+        }
+        if (new_y >= 0 && new_y < map->rows && map->map[new_y][map->enemy_x] != '1')
+        {
+            map->map[map->enemy_y][map->enemy_x] = '0';
+            map->enemy_y = new_y;
+            map->map[map->enemy_y][map->enemy_x] = 'N';
+            draw_map(map);
+        }
+    }
+    return (1);
+}
 
-//         // Update map only if the new position is valid
-//         if (new_y >= 0 && new_y < map->rows && map->map[new_y][map->enemy_x] != '1')
-//         {
-//             // Clear old position
-//             map->map[map->enemy_y][map->enemy_x] = '0';
-//             // Update to new position
-//             map->enemy_y = new_y;
-//             map->map[map->enemy_y][map->enemy_x] = 'N';
-//             draw_map(map);
-//         }
-//     }
-//     return (1);
-// }
+
 
 int	run_window(t_map *map)
 {
@@ -238,13 +240,13 @@ int	run_window(t_map *map)
         return (0);
     }
     map->coin_frame = 0;
-	// map->enemy_dir = 1;
+	map->enemy_dir = 1;
     find_player_and_coins_and_enemy(map);
     draw_map(map);
     mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);
     mlx_hook(map->window, 17, 0, &close_window, map);
     mlx_loop_hook(map->mlx, &animate_coin, map);
-    // mlx_loop_hook(map->mlx, &animate_enemy, map);
+    mlx_loop_hook(map->mlx, &animate_enemy, map);
     mlx_loop(map->mlx);
     return (1);
 }
