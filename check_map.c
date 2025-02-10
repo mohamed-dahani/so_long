@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 15:45:09 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/10 16:56:50 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ static int	check_valid_character(int fd, t_map *map)
 		while (line[i])
 		{
 			if (line[i] == 'P')
-				map->P++;
+				map->p++;
 			if (line[i] == 'C')
-				map->C++;
+				map->c++;
 			if (line[i] == 'E')
-				map->E++;
+				map->e++;
 			i++;
 		}
 		map->rows++;
 		free(line);
 	}
 	close(fd);
-	return (map->P == 1 && map->C != 0 && map->E == 1);
+	return (map->p == 1 && map->c != 0 && map->e == 1);
 }
 
 static char	**read_map(int fd, t_map *map, char *filename)
@@ -112,9 +112,9 @@ int	check_map(char *filename, t_map *map)
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
-	map->P = 0;
-	map->C = 0;
-	map->E = 0;
+	map->p = 0;
+	map->c = 0;
+	map->e = 0;
 	if (!check_valid_character(fd, map))
 		return (0);
 	map->copy_map = read_map(fd, map, filename);
