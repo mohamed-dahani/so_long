@@ -10,13 +10,13 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 LIBMLX = minilibx-linux/libmlx_Linux.a
-LIBFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+LIBFLAGS = -lXext -lX11 -lm
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LIBFLAGS) -o $(NAME) $(OBJS) $(LIBMLX)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBMLX) $(LIBFLAGS)
 
 all: $(NAME)
 

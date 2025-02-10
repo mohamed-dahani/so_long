@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:03:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 16:10:04 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/10 19:39:00 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	draw_map(t_map *map)
 {
 	int	i;
 
-	mlx_clear_window(map->mlx, map->window);
 	i = 0;
 	while (map->map[i])
 	{
