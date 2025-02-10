@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/09 23:30:01 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/10 15:40:38 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 typedef struct s_map
 {
+    int     P;
+    int     C;
+    int     E;
 	char	**copy_map;
 	char	**map;
 	int		rows;
@@ -58,5 +61,6 @@ int			flood_fill(t_map *map);
 int			check_edges_map(t_map *map);
 void		free_array(char **ptr, int i);
 int			run_window(t_map *map);
+int	        xpm_file_to_image(t_map *map);
 
 #endif

@@ -14,37 +14,37 @@
 
 static void	flood_fill_rec(t_map *map, int x, int y)
 {
-    if (x < 0 || x >= map->rows || y < 0 || y >= map->columns)
-        return ;
-    if (map->copy_map[x][y] != '0' && map->copy_map[x][y] != 'C'
-        && map->copy_map[x][y] != 'P' && map->copy_map[x][y] != 'N'
-        && map->copy_map[x][y] != 'E')
-        return ;
-    map->copy_map[x][y] = 'V';
-    flood_fill_rec(map, x + 1, y);
-    flood_fill_rec(map, x - 1, y);
-    flood_fill_rec(map, x, y + 1);
-    flood_fill_rec(map, x, y - 1);
+	if (x < 0 || x >= map->rows || y < 0 || y >= map->columns)
+		return ;
+	if (map->copy_map[x][y] != '0' && map->copy_map[x][y] != 'C'
+		&& map->copy_map[x][y] != 'P' && map->copy_map[x][y] != 'N'
+		&& map->copy_map[x][y] != 'E')
+		return ;
+	map->copy_map[x][y] = 'V';
+	flood_fill_rec(map, x + 1, y);
+	flood_fill_rec(map, x - 1, y);
+	flood_fill_rec(map, x, y + 1);
+	flood_fill_rec(map, x, y - 1);
 }
 
 static int	check_flood_fill(t_map *map)
 {
-    int	i;
-    int	j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (map->copy_map[i])
-    {
-        j = 0;
-        while (map->copy_map[i][j])
-        {
-            if (map->copy_map[i][j] == 'C' || map->copy_map[i][j] == 'E')
-                return (0);
-            j++;
-        }
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (map->copy_map[i])
+	{
+		j = 0;
+		while (map->copy_map[i][j])
+		{
+			if (map->copy_map[i][j] == 'C' || map->copy_map[i][j] == 'E')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 int	flood_fill(t_map *map)
