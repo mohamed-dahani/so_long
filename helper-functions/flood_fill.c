@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:24:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/08 20:54:24 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/11 18:21:08 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 static void	flood_fill_rec(t_map *map, int x, int y)
 {
+	int	count_coin;
+
+	count_coin = 0;
 	if (x < 0 || x >= map->rows || y < 0 || y >= map->columns)
 		return ;
 	if (map->copy_map[x][y] != '0' && map->copy_map[x][y] != 'C'
 		&& map->copy_map[x][y] != 'P' && map->copy_map[x][y] != 'N'
 		&& map->copy_map[x][y] != 'E')
 		return ;
+	if (map->copy_map[x][y] == 'C')
+		count_coin++;
+	if (map->copy_map[x][y] == 'E' && map->c != count_coin)
+	{
+		map->copy_map[x][y] = 'V';
+		return ;
+	}
 	map->copy_map[x][y] = 'V';
 	flood_fill_rec(map, x + 1, y);
 	flood_fill_rec(map, x - 1, y);

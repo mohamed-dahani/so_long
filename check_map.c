@@ -6,17 +6,39 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 16:56:50 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/11 18:17:43 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "helper-functions/get_next_line/get_next_line.h"
 #include "includes/so_long.h"
 
+static void	check_chars(t_map *map, char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '0')
+			map->_0++;
+		if (line[i] == '1')
+			map->_1++;
+		if (line[i] == 'P')
+			map->p++;
+		if (line[i] == 'C')
+			map->c++;
+		if (line[i] == 'N')
+			map->n++;
+		if (line[i] == 'E')
+			map->e++;
+		i++;
+	}
+}
+
 static int	check_valid_character(int fd, t_map *map)
 {
 	char	*line;
-	int		i;
 
 	map->rows = 0;
 	while (1)
@@ -24,22 +46,13 @@ static int	check_valid_character(int fd, t_map *map)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		i = 0;
-		while (line[i])
-		{
-			if (line[i] == 'P')
-				map->p++;
-			if (line[i] == 'C')
-				map->c++;
-			if (line[i] == 'E')
-				map->e++;
-			i++;
-		}
+		check_chars(map, line);
 		map->rows++;
 		free(line);
 	}
 	close(fd);
-	return (map->p == 1 && map->c != 0 && map->e == 1);
+	return (map->_0 && map->_1 && map->p == 1 && map->c && map->n
+		&& map->e == 1);
 }
 
 static char	**read_map(int fd, t_map *map, char *filename)
@@ -78,32 +91,9 @@ static int	check_size_map(t_map *map)
 			return (0);
 		i++;
 	}
-	if (i > 32 || line_length > 60)
+	if (i > 32 || line_length > 60 || i == (int)line_length)
 		return (0);
 	map->columns = (int)line_length;
-	return (1);
-}
-
-static int	check_all_chars(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map->copy_map[i])
-	{
-		j = 0;
-		while (map->copy_map[i][j])
-		{
-			if (map->copy_map[i][j] != 'P' && map->copy_map[i][j] != 'C'
-				&& map->copy_map[i][j] != 'E' && map->copy_map[i][j] != '0'
-				&& map->copy_map[i][j] != '1' && map->copy_map[i][j] != 'N'
-				&& map->copy_map[i][j] != '\n')
-				return (0);
-			j++;
-		}
-		i++;
-	}
 	return (1);
 }
 
@@ -112,8 +102,11 @@ int	check_map(char *filename, t_map *map)
 	int	fd;
 
 	fd = open(filename, O_RDONLY);
+	map->_0 = 0;
+	map->_1 = 0;
 	map->p = 0;
 	map->c = 0;
+	map->n = 0;
 	map->e = 0;
 	if (!check_valid_character(fd, map))
 		return (0);
@@ -121,8 +114,6 @@ int	check_map(char *filename, t_map *map)
 	if (!map->copy_map)
 		return (0);
 	if (!check_size_map(map))
-		return (free_array(map->copy_map, map->rows), 0);
-	if (!check_all_chars(map))
 		return (free_array(map->copy_map, map->rows), 0);
 	if (!flood_fill(map))
 		return (free_array(map->copy_map, map->rows), 0);
