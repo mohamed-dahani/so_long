@@ -6,14 +6,14 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/11 18:17:43 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/12 20:48:17 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "helper-functions/get_next_line/get_next_line.h"
 #include "includes/so_long.h"
 
-static void	check_chars(t_map *map, char *line)
+static void	check_chars(t_map *map, char *line, int *char_not_valid)
 {
 	int	i;
 
@@ -22,16 +22,18 @@ static void	check_chars(t_map *map, char *line)
 	{
 		if (line[i] == '0')
 			map->_0++;
-		if (line[i] == '1')
+		else if (line[i] == '1')
 			map->_1++;
-		if (line[i] == 'P')
+		else if (line[i] == 'P')
 			map->p++;
-		if (line[i] == 'C')
+		else if (line[i] == 'C')
 			map->c++;
-		if (line[i] == 'N')
+		else if (line[i] == 'N')
 			map->n++;
-		if (line[i] == 'E')
+		else if (line[i] == 'E')
 			map->e++;
+		else if (line[i] != '\n')
+			(*char_not_valid)++;
 		i++;
 	}
 }
@@ -39,20 +41,22 @@ static void	check_chars(t_map *map, char *line)
 static int	check_valid_character(int fd, t_map *map)
 {
 	char	*line;
+	int		char_not_valid;
 
 	map->rows = 0;
+	char_not_valid = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		check_chars(map, line);
+		check_chars(map, line, &char_not_valid);
 		map->rows++;
 		free(line);
 	}
 	close(fd);
-	return (map->_0 && map->_1 && map->p == 1 && map->c && map->n
-		&& map->e == 1);
+	return (map->_0 && map->_1 && map->p == 1 && map->c && map->n && map->e == 1
+		&& char_not_valid == 0);
 }
 
 static char	**read_map(int fd, t_map *map, char *filename)
