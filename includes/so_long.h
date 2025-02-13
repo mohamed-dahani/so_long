@@ -22,11 +22,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_enemy {
-    int x;
-    int y;
-    int dir;
-} t_enemy;
+typedef struct s_enemy
+{
+	int		x;
+	int		y;
+	int		dir;
+}			t_enemy;
 
 typedef struct s_map
 {
@@ -52,8 +53,8 @@ typedef struct s_map
 	int		player_y;
 	int		collectibles;
 	int		coin_frame;
-	t_enemy *enemies;
-    int 	enemy_count;
+	t_enemy	*enemies;
+	int		enemy_count;
 	int		moves;
 }			t_map;
 

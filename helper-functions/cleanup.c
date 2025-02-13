@@ -33,7 +33,7 @@ void	cleanup(t_map *map)
 	if (map->enemy)
 		mlx_destroy_image(map->mlx, map->enemy);
 	if (map->enemies)
-    	free(map->enemies);
+		free(map->enemies);
 	if (map->exit)
 		mlx_destroy_image(map->mlx, map->exit);
 	destroy_image_coin(map);
