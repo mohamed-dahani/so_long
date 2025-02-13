@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 14:05:17 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/12 20:48:17 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/13 20:25:02 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	check_valid_character(int fd, t_map *map)
 		free(line);
 	}
 	close(fd);
-	return (map->_0 && map->_1 && map->p == 1 && map->c && map->n && map->e == 1
+	return (map->_1 && map->p == 1 && map->c && map->n && map->e == 1
 		&& char_not_valid == 0);
 }
 
