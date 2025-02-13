@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:41:02 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/12 20:47:09 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:26:14 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	move_player(t_map *map, int move_x, int move_y)
 	map->player_y = new_y;
 	map->map[new_y][new_x] = 'P';
 	map->moves++;
+	ft_printf("moves: %d\n", map->moves);
 }
