@@ -6,20 +6,23 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:13:33 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 16:17:04 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/13 21:22:59 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static void	find_enemy(t_map *map)
+static void	store_position_of_enemy(t_map *map)
 {
 	int	i;
 	int	j;
+	int	idx;
 
+	map->enemies = malloc(map->enemy_count * sizeof(t_enemy));
+	if (!map->enemies)
+		exit(1);
+	idx = 0;
 	i = 0;
-	map->enemy_x = -1;
-	map->enemy_y = -1;
 	while (map->map[i])
 	{
 		j = 0;
@@ -27,13 +30,36 @@ static void	find_enemy(t_map *map)
 		{
 			if (map->map[i][j] == 'N')
 			{
-				map->enemy_x = j;
-				map->enemy_y = i;
+				map->enemies[idx].x = j;
+				map->enemies[idx].y = i;
+				map->enemies[idx].dir = 1;
+				idx++;
 			}
 			j++;
 		}
 		i++;
 	}
+}
+
+static void	find_enemy(t_map *map)
+{
+	int	i;
+	int	j;
+
+	map->enemy_count = 0;
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'N')
+				map->enemy_count++;
+			j++;
+		}
+		i++;
+	}
+	store_position_of_enemy(map);
 }
 
 void	find_player_and_coins_and_enemy(t_map *map)

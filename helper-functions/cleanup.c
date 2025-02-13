@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:29:53 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 16:38:32 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/13 21:09:24 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	cleanup(t_map *map)
 {
 	if (map->enemy)
 		mlx_destroy_image(map->mlx, map->enemy);
+	if (map->enemies)
+    	free(map->enemies);
 	if (map->exit)
 		mlx_destroy_image(map->mlx, map->exit);
 	destroy_image_coin(map);

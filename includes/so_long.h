@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 14:13:28 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/11 16:50:24 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/13 21:06:38 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+typedef struct s_enemy {
+    int x;
+    int y;
+    int dir;
+} t_enemy;
 
 typedef struct s_map
 {
@@ -46,9 +52,8 @@ typedef struct s_map
 	int		player_y;
 	int		collectibles;
 	int		coin_frame;
-	int		enemy_x;
-	int		enemy_y;
-	int		enemy_dir;
+	t_enemy *enemies;
+    int 	enemy_count;
 	int		moves;
 }			t_map;
 

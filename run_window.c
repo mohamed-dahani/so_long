@@ -6,7 +6,7 @@
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:38:09 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 16:52:22 by mdahani          ###   ########.fr       */
+/*   Updated: 2025/02/13 21:17:49 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	run_window(t_map *map)
 		return (0);
 	}
 	map->coin_frame = 0;
-	map->enemy_dir = 1;
 	map->moves = 0;
 	find_player_and_coins_and_enemy(map);
 	draw_map(map);
