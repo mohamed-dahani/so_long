@@ -42,7 +42,7 @@ static void	check_enemy_moves(t_map *map, int new_y, t_enemy *enemy)
 void	animate_enemy(t_map *map)
 {
 	static int	frame = 0;
-	const int	speed = 30;
+	const int	speed = 60;
 	int			i;
 	t_enemy		*enemy;
 	int			new_y;

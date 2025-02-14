@@ -15,7 +15,7 @@
 void	animate_coin(t_map *map)
 {
 	static int	frame_counter;
-	const int	delay = 10;
+	const int	delay = 20;
 
 	frame_counter++;
 	if (frame_counter >= delay)
