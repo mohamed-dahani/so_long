@@ -16,23 +16,23 @@ static int	on_keypress(int key_code, t_map *map)
 {
 	if (key_code == XK_Escape)
 	{
-		cleanup(map);
+		cleanup_bonus(map);
 		exit(0);
 	}
 	else if (key_code == XK_w || key_code == XK_Up)
-		move_player(map, 0, -1);
+		move_player_bonus(map, 0, -1);
 	else if (key_code == XK_s || key_code == XK_Down)
-		move_player(map, 0, 1);
+		move_player_bonus(map, 0, 1);
 	else if (key_code == XK_a || key_code == XK_Left)
-		move_player(map, -1, 0);
+		move_player_bonus(map, -1, 0);
 	else if (key_code == XK_d || key_code == XK_Right)
-		move_player(map, 1, 0);
+		move_player_bonus(map, 1, 0);
 	return (1);
 }
 
 static int	close_window(t_map *map)
 {
-	cleanup(map);
+	cleanup_bonus(map);
 	exit(0);
 }
 
@@ -43,7 +43,7 @@ static int	animation(t_map *map)
 	return (1);
 }
 
-int	run_window(t_map *map)
+int	run_window_bonus(t_map *map)
 {
 	map->mlx = mlx_init();
 	if (!map->mlx)
@@ -52,15 +52,15 @@ int	run_window(t_map *map)
 			"so_long");
 	if (!map->window)
 		return (0);
-	if (!xpm_file_to_image(map))
+	if (!xpm_file_to_image_bonus(map))
 	{
-		cleanup(map);
+		cleanup_bonus(map);
 		return (0);
 	}
 	map->coin_frame = 0;
 	map->moves = 0;
 	find_player_and_coins_and_enemy(map);
-	draw_map(map);
+	draw_map_bonus(map);
 	mlx_hook(map->window, KeyPress, KeyPressMask, &on_keypress, map);
 	mlx_hook(map->window, 17, 0, &close_window, map);
 	mlx_loop_hook(map->mlx, &animation, map);

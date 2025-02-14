@@ -12,7 +12,7 @@
 
 #include "../includes/so_long_bonus.h"\
 
-int	xpm_file_to_image(t_map *map)
+int	xpm_file_to_image_bonus(t_map *map)
 {
 	int (w), (h);
 	map->floor = mlx_xpm_file_to_image(map->mlx, "textures/floor.xpm", &w, &h);

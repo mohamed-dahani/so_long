@@ -41,7 +41,7 @@ static void	change_char_to_image(t_map *map, int i)
 	}
 }
 
-void	draw_map(t_map *map)
+void	draw_map_bonus(t_map *map)
 {
 	int	i;
 

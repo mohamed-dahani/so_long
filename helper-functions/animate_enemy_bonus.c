@@ -18,7 +18,7 @@ static int	game_over(t_enemy *enemy, t_map *map, int new_y)
 		|| (new_y == map->player_y && enemy->x == map->player_x))
 	{
 		ft_printf("Game Over!\n");
-		cleanup(map);
+		cleanup_bonus(map);
 		exit(0);
 	}
 	return (1);
@@ -60,6 +60,6 @@ void	animate_enemy(t_map *map)
 			check_enemy_moves(map, new_y, enemy);
 			i++;
 		}
-		draw_map(map);
+		draw_map_bonus(map);
 	}
 }

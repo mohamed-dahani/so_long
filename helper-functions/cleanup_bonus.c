@@ -28,7 +28,7 @@ static void	destroy_image_coin(t_map *map)
 		mlx_destroy_image(map->mlx, map->coin[5]);
 }
 
-void	cleanup(t_map *map)
+void	cleanup_bonus(t_map *map)
 {
 	if (map->enemy)
 		mlx_destroy_image(map->mlx, map->enemy);

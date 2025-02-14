@@ -101,7 +101,7 @@ static int	check_size_map(t_map *map)
 	return (1);
 }
 
-int	check_map(char *filename, t_map *map)
+int	check_map_bonus(char *filename, t_map *map)
 {
 	int	fd;
 
@@ -119,9 +119,9 @@ int	check_map(char *filename, t_map *map)
 		return (0);
 	if (!check_size_map(map))
 		return (free_array(map->copy_map, map->rows), 0);
-	if (!flood_fill(map))
+	if (!flood_fill_bonus(map))
 		return (free_array(map->copy_map, map->rows), 0);
-	if (!check_edges_map(map))
+	if (!check_edges_map_bonus(map))
 		return (free_array(map->copy_map, map->rows), 0);
 	map->map = read_map(fd, map, filename);
 	free_array(map->copy_map, map->rows);

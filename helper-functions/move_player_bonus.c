@@ -15,11 +15,11 @@
 static int	you_win(t_map *map)
 {
 	ft_printf("You win!\n");
-	cleanup(map);
+	cleanup_bonus(map);
 	exit(0);
 }
 
-void	move_player(t_map *map, int move_x, int move_y)
+void	move_player_bonus(t_map *map, int move_x, int move_y)
 {
 	int	new_x;
 	int	new_y;

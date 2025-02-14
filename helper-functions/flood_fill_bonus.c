@@ -57,7 +57,7 @@ static int	check_flood_fill(t_map *map)
 	return (1);
 }
 
-int	flood_fill(t_map *map)
+int	flood_fill_bonus(t_map *map)
 {
 	int	x;
 	int	y;

@@ -18,8 +18,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2 || !check_file_name(av[1]))
 		return (custom_error("Error\nNo such file or directory !\n"), 1);
-	if (!check_map(av[1], &map))
+	if (!check_map_bonus(av[1], &map))
 		return (custom_error("Error\nInvalid map !\n"), 1);
-	if (!run_window(&map))
+	if (!run_window_bonus(&map))
 		return (custom_error("Error\nWindow is not running !\n"), 1);
 }
