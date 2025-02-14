@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long_bonus.h"\
+#include "../includes/so_long_bonus.h"
 
 int	xpm_file_to_image_bonus(t_map *map)
 {

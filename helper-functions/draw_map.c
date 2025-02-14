@@ -29,7 +29,8 @@ static void	change_char_to_image(t_map_data *map, int i)
 			mlx_put_image_to_window(map->mlx, map->window, map->player, j * 64,
 				i * 64);
 		else if (map->map[i][j] == 'C')
-			mlx_put_image_to_window(map->mlx, map->window, map->coin, j * 64, i * 64);
+			mlx_put_image_to_window(map->mlx, map->window, map->coin, j * 64, i
+				* 64);
 		else if (map->map[i][j] == 'E')
 			mlx_put_image_to_window(map->mlx, map->window, map->exit, j * 64, i
 				* 64);
