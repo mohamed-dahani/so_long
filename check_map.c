@@ -95,7 +95,7 @@ static int	check_size_map(t_map *map)
 			return (0);
 		i++;
 	}
-	if (i > 32 || line_length > 60 || i == (int)line_length)
+	if (i > 32 || line_length > 60)
 		return (0);
 	map->columns = (int)line_length;
 	return (1);
