@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	custom_error(char *msg)
 {

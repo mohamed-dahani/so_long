@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "helper-functions/get_next_line/get_next_line.h"
-#include "includes/so_long.h"
+#include "includes/so_long_bonus.h"
 
 static void	check_chars(t_map *map, char *line, int *char_not_valid)
 {

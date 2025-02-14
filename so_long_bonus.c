@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animate_coin.c                                     :+:      :+:    :+:   */
+/*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 16:20:43 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 16:21:08 by mdahani          ###   ########.fr       */
+/*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/07 20:32:42 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "includes/so_long_bonus.h"
 
-void	animate_coin(t_map *map)
+int	main(int ac, char **av)
 {
-	static int	frame_counter;
-	const int	delay = 20;
+	t_map		map;
 
-	frame_counter++;
-	if (frame_counter >= delay)
-	{
-		frame_counter = 0;
-		map->coin_frame = (map->coin_frame + 1) % 6;
-	}
-	draw_map(map);
+	if (ac != 2 || !check_file_name(av[1]))
+		return (custom_error("Error\nNo such file or directory !\n"), 1);
+	if (!check_map(av[1], &map))
+		return (custom_error("Error\nInvalid map !\n"), 1);
+	if (!run_window(&map))
+		return (custom_error("Error\nWindow is not running !\n"), 1);
 }

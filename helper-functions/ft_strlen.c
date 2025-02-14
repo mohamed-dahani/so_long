@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {

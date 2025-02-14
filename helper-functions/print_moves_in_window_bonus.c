@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   print_moves_in_window.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/30 13:08:34 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/07 20:32:42 by mdahani          ###   ########.fr       */
+/*   Created: 2025/02/10 15:52:00 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/10 15:57:59 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long_bonus.h"
+#include "get_next_line/get_next_line.h"
 
-int	main(int ac, char **av)
+void	print_moves_in_window(t_map *map)
 {
-	t_map		map;
+	char	*moves_num;
+	char	*moves_str;
 
-	if (ac != 2 || !check_file_name(av[1]))
-		return (custom_error("Error\nNo such file or directory !\n"), 1);
-	if (!check_map(av[1], &map))
-		return (custom_error("Error\nInvalid map !\n"), 1);
-	if (!run_window(&map))
-		return (custom_error("Error\nWindow is not running !\n"), 1);
+	moves_num = ft_itoa(map->moves);
+	moves_str = ft_strjoin("Moves: ", moves_num);
+	mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, moves_str);
+	free(moves_str);
+	free(moves_num);
 }

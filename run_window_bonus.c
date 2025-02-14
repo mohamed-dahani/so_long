@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "includes/so_long_bonus.h"
 
 static int	on_keypress(int key_code, t_map *map)
 {

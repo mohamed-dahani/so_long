@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static int	you_win(t_map *map)
 {
@@ -45,5 +45,4 @@ void	move_player(t_map *map, int move_x, int move_y)
 	map->player_y = new_y;
 	map->map[new_y][new_x] = 'P';
 	map->moves++;
-	ft_printf("moves: %d\n", map->moves);
 }

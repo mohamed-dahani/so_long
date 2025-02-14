@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_moves_in_window.c                            :+:      :+:    :+:   */
+/*   animate_coin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdahani <mdahani@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 15:52:00 by mdahani           #+#    #+#             */
-/*   Updated: 2025/02/10 15:57:59 by mdahani          ###   ########.fr       */
+/*   Created: 2025/02/10 16:20:43 by mdahani           #+#    #+#             */
+/*   Updated: 2025/02/10 16:21:08 by mdahani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
-#include "get_next_line/get_next_line.h"
+#include "../includes/so_long_bonus.h"
 
-void	print_moves_in_window(t_map *map)
+void	animate_coin(t_map *map)
 {
-	char	*moves_num;
-	char	*moves_str;
+	static int	frame_counter;
+	const int	delay = 20;
 
-	moves_num = ft_itoa(map->moves);
-	moves_str = ft_strjoin("Moves: ", moves_num);
-	mlx_string_put(map->mlx, map->window, 20, 40, 0xFFFFFF, moves_str);
-	free(moves_str);
-	free(moves_num);
+	frame_counter++;
+	if (frame_counter >= delay)
+	{
+		frame_counter = 0;
+		map->coin_frame = (map->coin_frame + 1) % 6;
+	}
+	draw_map(map);
 }

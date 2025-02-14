@@ -12,6 +12,7 @@
 
 #include "get_next_line.h"
 #include "../../includes/so_long.h"
+#include "../../includes/so_long_bonus.h"
 
 char	*ft_strdup(char *s1)
 {

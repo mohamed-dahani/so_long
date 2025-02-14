@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 int	check_edges_map(t_map *map)
 {
