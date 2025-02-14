@@ -65,18 +65,18 @@ char		*ft_itoa(int n);
 
 void		custom_error(char *msg);
 int			check_file_name(char *av);
-int			check_map(char *filename, t_map *map);
-int			flood_fill(t_map *map);
-int			check_edges_map(t_map *map);
+int			check_map_bonus(char *filename, t_map *map);
+int			flood_fill_bonus(t_map *map);
+int			check_edges_map_bonus(t_map *map);
 void		free_array(char **ptr, int i);
-int			run_window(t_map *map);
-int			xpm_file_to_image(t_map *map);
+int			run_window_bonus(t_map *map);
+int			xpm_file_to_image_bonus(t_map *map);
 void		find_player_and_coins_and_enemy(t_map *map);
-void		draw_map(t_map *map);
-void		move_player(t_map *map, int move_x, int move_y);
+void		draw_map_bonus(t_map *map);
+void		move_player_bonus(t_map *map, int move_x, int move_y);
 void		animate_coin(t_map *map);
 void		animate_enemy(t_map *map);
-void		cleanup(t_map *map);
+void		cleanup_bonus(t_map *map);
 void		print_moves_in_window(t_map *map);
 
 #endif
